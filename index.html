@@ -15,94 +15,74 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-}
-
-/* partículas */
-body::before {
-  content: "";
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background: repeating-radial-gradient(circle, #00ccff22 1px, transparent 2px);
-  animation: move 20s linear infinite;
-  opacity: 0.2;
-}
-
-@keyframes move {
-  from { transform: translate(0,0); }
-  to { transform: translate(-200px, -200px); }
 }
 
 .box {
-  position: relative;
   background: rgba(0, 10, 25, 0.85);
   border-radius: 20px;
   padding: 50px;
   text-align: center;
-  box-shadow: 
-    0 0 20px #00ccff55,
-    0 0 60px #0077ff33,
-    inset 0 0 20px #00ccff22;
-  backdrop-filter: blur(15px);
+  box-shadow: 0 0 20px #00ccff55, 0 0 60px #0077ff33;
 }
 
 h1 {
   color: #00ccff;
-  text-shadow: 0 0 10px #00ccff, 0 0 30px #0077ff;
-  margin-bottom: 25px;
+  text-shadow: 0 0 10px #00ccff;
 }
 
 button {
-  padding: 14px 30px;
+  padding: 12px 25px;
   border: none;
   border-radius: 10px;
   background: linear-gradient(90deg, #00ccff, #0077ff);
   color: white;
-  font-size: 16px;
   cursor: pointer;
+  margin-top: 15px;
   transition: 0.3s;
-  box-shadow: 0 0 15px #00ccff;
 }
 
 button:hover {
   transform: scale(1.08);
-  box-shadow: 0 0 30px #00ccff, 0 0 60px #0077ff;
+  box-shadow: 0 0 20px #00ccff;
 }
 
-/* key */
 .key {
-  margin-top: 25px;
-  font-size: 24px;
-  letter-spacing: 3px;
+  margin-top: 20px;
+  font-size: 22px;
   color: #00ffcc;
-  text-shadow: 0 0 10px #00ccff;
   opacity: 0;
+  transition: 0.4s;
 }
 
-/* efeito digitando */
 .reveal {
   opacity: 1;
-  border-right: 2px solid #00ccff;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-  animation: typing 2s steps(10) forwards, blink 0.6s infinite;
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 120px }
-}
-
-@keyframes blink {
-  50% { border-color: transparent }
 }
 
 .msg {
   margin-top: 10px;
   color: #00ff88;
-  font-size: 14px;
+}
+
+/* botões extras */
+.links {
+  margin-top: 25px;
+}
+
+.links a {
+  display: block;
+  margin-top: 10px;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 8px;
+  background: #00ccff22;
+  color: #00ccff;
+  transition: 0.3s;
+}
+
+.links a:hover {
+  background: #00ccff;
+  color: black;
+  box-shadow: 0 0 15px #00ccff;
 }
 </style>
 </head>
@@ -114,17 +94,26 @@ button:hover {
 
   <button onclick="copiar()">COPIAR KEY</button>
 
-  <div id="key" class="key"></div>
+  <div id="key" class="key">Vortex83</div>
   <div id="msg" class="msg"></div>
+
+  <div class="links">
+    <a href="https://chat.whatsapp.com/DrlOTtZar6hIk7wRf9dMVn" target="_blank">
+      🚀 Entrar no Grupo
+    </a>
+
+    <a href="https://whatsapp.com/channel/0029VbC7FWcJENxsIOsndS15" target="_blank">
+      📢 Seguir Canal
+    </a>
+  </div>
 </div>
 
 <script>
 function copiar() {
   const key = "Vortex83";
 
-  // copiar com fallback
   if (navigator.clipboard) {
-    navigator.clipboard.writeText(key).then(() => mostrar(key));
+    navigator.clipboard.writeText(key).then(() => mostrar());
   } else {
     let input = document.createElement("textarea");
     input.value = key;
@@ -132,16 +121,13 @@ function copiar() {
     input.select();
     document.execCommand("copy");
     document.body.removeChild(input);
-    mostrar(key);
+    mostrar();
   }
 }
 
-function mostrar(key) {
-  const keyEl = document.getElementById("key");
-  keyEl.innerText = key;
-  keyEl.classList.add("reveal");
-
-  document.getElementById("msg").innerText = "✔ Key copiada com sucesso!";
+function mostrar() {
+  document.getElementById("msg").innerText = "✔ Key copiada!";
+  document.getElementById("key").classList.add("reveal");
 }
 </script>
 
